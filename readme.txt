@@ -77,7 +77,7 @@ ARchitecture micro service :
 	CATALOGUE-SERVICE	n/a (1)	(1)	UP (1) - DIOUF-LENOVO:CATALOGUE-SERVICE:9090
 	USERS-SERVICE	n/a (1)	(1)	UP (1) - DIOUF-LENOVO:USERS-SERVICE:9091
 
--Service-gatewat ( spring-cloud gateway + eureka client + actuator)
+-Service-gateway ( spring-cloud gateway + eureka client + actuator)
 - users
 - catalogue
 
