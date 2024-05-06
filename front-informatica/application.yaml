@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://informatica:souleyE59sss@cluster0.sefgi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: Cluster0
