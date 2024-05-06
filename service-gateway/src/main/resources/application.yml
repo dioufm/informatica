@@ -1,0 +1,55 @@
+server:
+  port: 8989
+logging.level.root: info
+logging.level.org.springframework.cloud.gateway.route.RouteDefinitionLocator: INFO
+logging.level.org.springframework.cloud.gateway: TRACE
+
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    discovery:
+      enabled: true
+    gateway:
+      routes:
+        - id: users-service
+          uri: lb://USERS-SERVICE
+          predicates:
+            - Path=/users/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: users-service
+                fallbackuri: forward:/fallback/users-service
+
+        - id: catalogue-service
+          uri: lb://CATALOGUE-SERVICE
+          predicates:
+            - Path=/catalogue/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: catalogue-service
+                fallbackuri: forward:/fallback/catalogue-service
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+management.health.circuitbreakers.enabled: true
+management.health.ratelimiters.enabled: true
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+
+
+resilience4j.ratelimiter:
+  configs:
+    instances:
+      registerHealthIndicator: true
